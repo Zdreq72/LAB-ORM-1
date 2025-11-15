@@ -1,0 +1,43 @@
+{% extends "blogger/base.html" %}
+{% block title %}New Post{% endblock %}
+
+{% block content %}
+<section class="wrap">
+
+    <div class="head">
+        <h2 class="head-title">New post</h2>
+        <p class="head-sub">Write something meaningful.</p>
+    </div>
+
+    <form method="post" class="form">
+        {% csrf_token %}
+
+        <div class="form-row">
+            <label class="form-label">
+                <span class="material-symbols-rounded form-icon">title</span>
+                Title
+            </label>
+            <input type="text" name="title" class="input" placeholder="Your title..." required>
+        </div>
+
+        <div class="form-row">
+            <label class="form-label">
+                <span class="material-symbols-rounded form-icon">notes</span>
+                Content
+            </label>
+            <textarea name="content" class="input area" placeholder="Write here..." required></textarea>
+        </div>
+
+        <div class="form-row check">
+            <input type="checkbox" name="is_published" checked>
+            <span>Published</span>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-main">Save</button>
+            <a href="{% url 'blogger:home' %}" class="btn-soft">Cancel</a>
+        </div>
+    </form>
+
+</section>
+{% endblock %}
