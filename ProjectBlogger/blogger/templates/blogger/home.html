@@ -13,14 +13,23 @@
     <div class="post-grid">
         {% for post in posts %}
         <article class="post">
-            <div class="post-top">
-                <h3 class="post-title">{{ post.title }}</h3>
-                <span class="post-time">
-                    <span class="material-symbols-rounded time-icon">schedule</span>
-                    {{ post.published_at|date:"M d, Y · H:i" }}
-                </span>
-            </div>
-            <p class="post-text">{{ post.content|linebreaksbr }}</p>
+            <a href="{% url 'blogger:detail' post.id %}" class="post-link">
+                <div class="post-top">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <span class="post-time">
+                        <span class="material-symbols-rounded time-icon">schedule</span>
+                        {{ post.published_at|date:"M d, Y · H:i" }}
+                    </span>
+                </div>
+
+                {% if post.post_image %}
+                <div class="post-image">
+                    <img src="{{ post.post_image.url }}" alt="{{ post.title }}">
+                </div>
+                {% endif %}
+
+                <p class="post-text">{{ post.content|truncatechars:140 }}</p>
+            </a>
         </article>
         {% endfor %}
     </div>

@@ -1,0 +1,23 @@
+{% extends "blogger/base.html" %}
+{% block title %}Delete Post{% endblock %}
+
+{% block content %}
+<section class="wrap">
+
+    <div class="head">
+        <h2 class="head-title">Delete post</h2>
+        <p class="head-sub">Are you sure you want to delete "{{ post.title }}"?</p>
+    </div>
+
+    <div class="form">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button class="btn-main delete-btn">Yes, delete</button>
+                <a href="{% url 'blogger:detail' post.id %}" class="btn-soft">Cancel</a>
+            </div>
+        </form>
+    </div>
+
+</section>
+{% endblock %}

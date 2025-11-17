@@ -1,0 +1,51 @@
+{% extends "blogger/base.html" %}
+{% block title %}Post details{% endblock %}
+
+{% block content %}
+<section class="wrap">
+
+    <div class="head">
+        <h2 class="head-title">{{ post.title }}</h2>
+        <p class="head-sub">
+            <span class="material-symbols-rounded time-icon">schedule</span>
+            {{ post.published_at|date:"M d, Y · H:i" }}
+            {% if post.publisher %}
+            · by {{ post.publisher }}
+            {% endif %}
+        </p>
+    </div>
+
+    <article class="form">
+        {% if post.post_image %}
+        <div class="detail-image">
+            <img src="{{ post.post_image.url }}" alt="{{ post.title }}">
+        </div>
+        {% endif %}
+
+        <p class="detail-text">
+            {{ post.content|linebreaksbr }}
+        </p>
+
+        <div class="detail-actions">
+            <a href="{% url 'blogger:edit' post.id %}" class="btn-soft">
+                <span class="material-symbols-rounded">edit</span>
+                Edit
+            </a>
+
+            <form method="post" action="{% url 'blogger:delete' post.id %}">
+                {% csrf_token %}
+                <button class="btn-main delete-btn">
+                    <span class="material-symbols-rounded">delete</span>
+                    Delete
+                </button>
+            </form>
+
+            <a href="{% url 'blogger:home' %}" class="btn-soft">
+                <span class="material-symbols-rounded">arrow_back</span>
+                Back
+            </a>
+        </div>
+    </article>
+
+</section>
+{% endblock %}
