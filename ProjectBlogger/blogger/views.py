@@ -6,9 +6,13 @@ from .models import Post
 
 
 def home(request):
-    posts = Post.objects.filter(is_published=True)
+    posts = Post.objects.all()
     return render(request, "blogger/home.html", {"posts": posts})
 
+
+def all_posts(request):
+    posts = Post.objects.all()
+    return render(request, "blogger/all_posts.html", {"posts": posts})
 
 def add_post(request):
     if request.method == "POST":

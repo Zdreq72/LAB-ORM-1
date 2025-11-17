@@ -10,7 +10,7 @@
             <span class="material-symbols-rounded time-icon">schedule</span>
             {{ post.published_at|date:"M d, Y · H:i" }}
             {% if post.publisher %}
-            · by {{ post.publisher }}
+            · {{ post.publisher }}
             {% endif %}
         </p>
     </div>
@@ -32,7 +32,7 @@
                 Edit
             </a>
 
-            <button type="button" class="btn-main delete-btn danger-btn" id="open-delete">
+            <button type="button" class="btn-main danger-btn" id="openDelete">
                 <span class="material-symbols-rounded">delete</span>
                 Delete
             </button>
@@ -44,25 +44,22 @@
         </div>
     </article>
 
-    <div class="overlay" id="delete-layer">
+    <div class="overlay" id="deleteOverlay">
         <div class="dialog">
             <div class="dialog-head">
-                <span class="dialog-title">Delete post</span>
-                <button class="dialog-close" type="button" id="close-delete">
+                <h3 class="dialog-title">Delete post</h3>
+                <button type="button" class="dialog-close" id="closeDelete">
                     <span class="material-symbols-rounded">close</span>
                 </button>
             </div>
-
             <p class="dialog-text">
                 Are you sure you want to delete "{{ post.title }}"?
             </p>
-
             <div class="dialog-actions">
-                <button type="button" class="btn-soft" id="cancel-delete">Close</button>
-
+                <button type="button" class="btn-soft" id="cancelDelete">Close</button>
                 <form method="post" action="{% url 'blogger:delete' post.id %}">
                     {% csrf_token %}
-                    <button class="btn-main danger-btn" type="submit">Delete</button>
+                    <button class="btn-main danger-btn">Delete</button>
                 </form>
             </div>
         </div>
@@ -71,29 +68,29 @@
 </section>
 
 <script>
-    const openDelete = document.getElementById("open-delete");
-    const closeDelete = document.getElementById("close-delete");
-    const cancelDelete = document.getElementById("cancel-delete");
-    const deleteLayer = document.getElementById("delete-layer");
+    document.addEventListener("DOMContentLoaded", function () {
+        var openButton = document.getElementById("openDelete");
+        var overlay = document.getElementById("deleteOverlay");
+        var closeButton = document.getElementById("closeDelete");
+        var cancelButton = document.getElementById("cancelDelete");
 
-    if (openDelete && deleteLayer) {
-        openDelete.addEventListener("click", function () {
-            deleteLayer.classList.add("overlay-show");
-        });
-    }
-
-    function hideDeleteLayer() {
-        if (deleteLayer) {
-            deleteLayer.classList.remove("overlay-show");
+        function showOverlay() {
+            overlay.classList.add("overlay-show");
         }
-    }
 
-    if (closeDelete) {
-        closeDelete.addEventListener("click", hideDeleteLayer);
-    }
+        function hideOverlay() {
+            overlay.classList.remove("overlay-show");
+        }
 
-    if (cancelDelete) {
-        cancelDelete.addEventListener("click", hideDeleteLayer);
-    }
+        if (openButton) {
+            openButton.addEventListener("click", showOverlay);
+        }
+        if (closeButton) {
+            closeButton.addEventListener("click", hideOverlay);
+        }
+        if (cancelButton) {
+            cancelButton.addEventListener("click", hideOverlay);
+        }
+    });
 </script>
 {% endblock %}

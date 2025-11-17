@@ -1,25 +1,13 @@
 {% extends "blogger/base.html" %}
-{% block title %}Latest posts{% endblock %}
+{% block title %}All Posts{% endblock %}
 
 {% block content %}
 <section class="wrap">
 
-    <div class="page-header">
-        <div class="page-header-text">
-            <h1 class="page-title">Posts</h1>
-            <p class="page-note">Latest entries from your blog.</p>
-        </div>
-        <div class="page-header-actions">
-            <a href="{% url 'blogger:add_post' %}" class="btn-main">New post</a>
-            <a href="{% url 'blogger:all_posts' %}" class="btn-soft">View all</a>
-        </div>
-    </div>
-
     <div class="head">
-        <h2 class="head-title">Latest posts</h2>
-        <p class="head-sub">Most recent posts are shown first.</p>
+        <h2 class="head-title">All posts</h2>
+        <p class="head-sub">Browse through all the blog posts.</p>
     </div>
-
     {% if posts %}
     <div class="post-grid">
         {% for post in posts %}
@@ -29,27 +17,22 @@
                     <h3 class="post-title">{{ post.title }}</h3>
                     <span class="post-time">
                         <span class="material-symbols-rounded time-icon">schedule</span>
-                        {{ post.published_at|date:"M d, Y · H:i" }}
+                        {{ post.published_at|date:"M d, Y · H:i" }} 
                     </span>
                 </div>
 
-                {% if post.post_image %}
+                {% if post.post_image %}    
                 <div class="post-image">
                     <img src="{{ post.post_image.url }}" alt="{{ post.title }}">
                 </div>
                 {% endif %}
-
                 <p class="post-text">{{ post.content|truncatechars:140 }}</p>
             </a>
         </article>
-        {% endfor %}
+        {% endfor %}    
     </div>
     {% else %}
-    <div class="empty">
-        <p>No posts yet.</p>
-        <a href="{% url 'blogger:add_post' %}" class="btn-main small-btn">Write the first one</a>
-    </div>
+    <p>No posts available.</p>
     {% endif %}
-
 </section>
 {% endblock %}

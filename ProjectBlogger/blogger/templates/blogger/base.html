@@ -7,7 +7,7 @@
     <title>{% block title %}Blogger{% endblock %}</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'blogger/css/style.css' %}">
 </head>
@@ -18,10 +18,10 @@
         <header class="bar">
             <div class="bar-in">
                 <a href="{% url 'blogger:home' %}" class="brand">
-                    <span class="material-symbols-rounded icon">edit_note</span>
+                    <span class="material-symbols-rounded icon">menu_book</span>
                     <div class="brand-box">
                         <span class="brand-name">Blogger</span>
-                        <span class="brand-desc">Your simple diary</span>
+                        <span class="brand-desc">Small notes, simple layout</span>
                     </div>
                 </a>
 
@@ -35,33 +35,12 @@
             </div>
         </header>
 
-        <section class="hero">
-            <div class="hero-box">
-                <p class="hero-label">Your space</p>
-                <h1 class="hero-title">Write and keep your thoughts organized.</h1>
-                <p class="hero-sub">A clean layout that keeps the focus on your stories.</p>
-
-                <div class="hero-actions">
-                    <a href="{% url 'blogger:add_post' %}" class="btn-main">Start writing</a>
-                    <a href="{% url 'blogger:home' %}" class="btn-soft">Browse posts</a>
-                </div>
-            </div>
-
-            <div class="hero-side">
-                <div class="hero-card">
-                    <span class="material-symbols-rounded hero-icon">auto_stories</span>
-                    <span class="hero-card-title">Organized posts</span>
-                    <span class="hero-card-text">Everything saved with timestamps.</span>
-                </div>
-            </div>
-        </section>
-
         <main class="content">
             {% block content %}{% endblock %}
         </main>
 
         <footer class="foot">
-            <p>© Blogger — made for learning</p>
+            <p>Blogger · practice project</p>
         </footer>
 
     </div>
