@@ -343,49 +343,95 @@ body {
     object-fit: cover;
 }
 
-.detail-image {
-    margin-bottom: 12px;
-    border-radius: 12px;
-    overflow: hidden;
-}
 
-.detail-image img {
-    width: 100%;
-    display: block;
-    max-height: 320px;
-    object-fit: cover;
-}
-
-.small-preview {
-    max-width: 260px;
-    margin-bottom: 8px;
-}
 
 .detail-text {
     font-size: 14px;
     color: #374151;
     white-space: pre-wrap;
-    margin-bottom: 14px;
+    margin-top: 10px;
 }
 
 .detail-actions {
+    margin-top: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
 }
 
-.detail-actions .btn-soft,
-.detail-actions .btn-main {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+.detail-image {
+    margin-bottom: 12px;
 }
 
-.delete-btn {
+.detail-image img {
+    max-width: 100%;
+    border-radius: 12px;
+    display: block;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+}
+
+.overlay-show {
+    display: flex;
+}
+
+.dialog {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    min-width: 260px;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.5);
+}
+
+.dialog-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.dialog-title {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dialog-close {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #4b5563;
+}
+
+.dialog-text {
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 16px;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.danger-btn {
     background: #dc2626;
 }
 
-.delete-btn:hover {
+.danger-btn:hover {
     background: #b91c1c;
 }

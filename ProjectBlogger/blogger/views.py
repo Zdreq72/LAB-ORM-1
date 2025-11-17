@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect , get_object_or_404
+from django.shortcuts import render, redirect 
 from django.http import HttpResponse , HttpRequest
 from django.utils import timezone
 from .models import Post
@@ -33,12 +33,17 @@ def add_post(request):
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = Post.objects.filter(id=post_id).first()
+    if not post:
+        return redirect("blogger:home")
+
     return render(request, "blogger/detail.html", {"post": post})
 
 
 def edit_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = Post.objects.filter(id=post_id).first()
+    if not post:
+        return redirect("blogger:home")
 
     if request.method == "POST":
         post.title = request.POST.get("title", "").strip()
@@ -57,10 +62,12 @@ def edit_post(request, post_id):
 
 
 def delete_post(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
+    post = Post.objects.filter(id=post_id).first()
+    if not post:
+        return redirect("blogger:home")
 
     if request.method == "POST":
         post.delete()
         return redirect("blogger:home")
 
-    return render(request, "blogger/confirm_delete.html", {"post": post})
+    return redirect("blogger:detail", post_id=post.id)

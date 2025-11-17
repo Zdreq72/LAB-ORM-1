@@ -32,13 +32,10 @@
                 Edit
             </a>
 
-            <form method="post" action="{% url 'blogger:delete' post.id %}">
-                {% csrf_token %}
-                <button class="btn-main delete-btn">
-                    <span class="material-symbols-rounded">delete</span>
-                    Delete
-                </button>
-            </form>
+            <button type="button" class="btn-main delete-btn danger-btn" id="open-delete">
+                <span class="material-symbols-rounded">delete</span>
+                Delete
+            </button>
 
             <a href="{% url 'blogger:home' %}" class="btn-soft">
                 <span class="material-symbols-rounded">arrow_back</span>
@@ -47,5 +44,56 @@
         </div>
     </article>
 
+    <div class="overlay" id="delete-layer">
+        <div class="dialog">
+            <div class="dialog-head">
+                <span class="dialog-title">Delete post</span>
+                <button class="dialog-close" type="button" id="close-delete">
+                    <span class="material-symbols-rounded">close</span>
+                </button>
+            </div>
+
+            <p class="dialog-text">
+                Are you sure you want to delete "{{ post.title }}"?
+            </p>
+
+            <div class="dialog-actions">
+                <button type="button" class="btn-soft" id="cancel-delete">Close</button>
+
+                <form method="post" action="{% url 'blogger:delete' post.id %}">
+                    {% csrf_token %}
+                    <button class="btn-main danger-btn" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
 </section>
+
+<script>
+    const openDelete = document.getElementById("open-delete");
+    const closeDelete = document.getElementById("close-delete");
+    const cancelDelete = document.getElementById("cancel-delete");
+    const deleteLayer = document.getElementById("delete-layer");
+
+    if (openDelete && deleteLayer) {
+        openDelete.addEventListener("click", function () {
+            deleteLayer.classList.add("overlay-show");
+        });
+    }
+
+    function hideDeleteLayer() {
+        if (deleteLayer) {
+            deleteLayer.classList.remove("overlay-show");
+        }
+    }
+
+    if (closeDelete) {
+        closeDelete.addEventListener("click", hideDeleteLayer);
+    }
+
+    if (cancelDelete) {
+        cancelDelete.addEventListener("click", hideDeleteLayer);
+    }
+</script>
 {% endblock %}
